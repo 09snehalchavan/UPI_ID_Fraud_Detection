@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UPI ID Fraud Detection</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: url('img.jpeg') center center / cover no-repeat;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Add a semi‑transparent overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            /* bring container above overlay */
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #3d4040;
+            text-align: center;
+            color: #000;
+            max-width: 350px;
+            width: 100%;
+        }
+
+        .container h1 {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group input {
+            width: calc(100% - 12px);
+            padding: 8px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .predict-button {
+            background-color: #0d9b9b;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .predict-button:hover {
+            background-color: #0d9b9b8c;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <h1>UPI ID Fraud Detection</h1>
+        <form action="/predict" method="post">
+            <div class="input-group">
+                <input type="text" name="Transaction_Amount" placeholder="Enter the Transaction Amount" />
+            </div>
+            <div class="input-group">
+                <input type="text" name="Time_of_Transaction" placeholder="Enter Time of Transaction" />
+            </div>
+            <div class="input-group">
+                <input type="text" name="Previous_Fraudulent_Transactions"
+                    placeholder="Enter Previous Fraudulent Transactions" />
+            </div>
+            <div class="input-group">
+                <input type="text" name="Account_Age" placeholder="Enter the Account Age" />
+            </div>
+            <div class="input-group">
+                <input type="text" name="Number_of_Transactions_Last_24H"
+                    placeholder="Number of Transactions in Last 24H" />
+            </div>
+            <input type="submit" class="predict-button" value="Predict" />
+        </form>
+
+        {% if prediction_text %}
+        <h3>{{ prediction_text }}</h3>
+        {% endif %}
+    </div>
+</body>
+
+</html>
